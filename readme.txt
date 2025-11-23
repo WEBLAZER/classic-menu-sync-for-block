@@ -91,3 +91,9 @@ For developers: The plugin exposes REST API endpoints for programmatic access:
 == Support ==
 
 For support, feature requests, or bug reports, please visit: https://weblazer.fr
+
+== GitHub ==
+
+This plugin is available on GitHub: https://github.com/WEBLAZER/menu-sync-for-navigation-block
+
+You can contribute, report issues, or download the latest version from the repository.

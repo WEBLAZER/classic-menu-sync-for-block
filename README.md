@@ -1,5 +1,7 @@
 # Menu Sync for Navigation Block
 
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/WEBLAZER/menu-sync-for-navigation-block)
+
 Un plugin WordPress qui synchronise automatiquement les blocs Navigation avec les menus classiques en utilisant le système d'import natif de WordPress.
 
 ## Description
@@ -91,6 +93,12 @@ Oui, vous pouvez lier plusieurs blocs Navigation au même menu classique.
 **Que se passe-t-il si je supprime un menu classique ?**
 
 Le bloc Navigation conservera son dernier contenu synchronisé. Vous pouvez le mettre à jour manuellement ou le lier à un menu différent.
+
+## Dépôt GitHub
+
+Ce plugin est disponible sur GitHub : [https://github.com/WEBLAZER/menu-sync-for-navigation-block](https://github.com/WEBLAZER/menu-sync-for-navigation-block)
+
+Vous pouvez contribuer, signaler des problèmes ou télécharger la dernière version depuis le dépôt.
 
 ## Support
 

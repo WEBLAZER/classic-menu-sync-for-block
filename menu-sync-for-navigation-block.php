@@ -2,6 +2,7 @@
 /**
  * Plugin Name: Menu Sync for Navigation Block
  * Plugin URI: https://weblazer.fr/plugins/menu-sync-for-navigation-block
+ * GitHub Plugin URI: https://github.com/WEBLAZER/menu-sync-for-navigation-block
  * Description: Automatically synchronizes Navigation blocks with classic menus using WordPress native import system.
  * Version: 1.0.0
  * Author: weblazer35
