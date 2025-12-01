@@ -16,15 +16,15 @@
 
 	function getMenuOptions() {
 		if (
-			window.menuSyncForNavigationBlock &&
-			Array.isArray(window.menuSyncForNavigationBlock.menus)
+			window.classicMenuSyncForBlock &&
+			Array.isArray(window.classicMenuSyncForBlock.menus)
 		) {
 			return [
-				{ label: __('Do not sync with classic menu', 'menu-sync-for-navigation-block'), value: '' },
-				...window.menuSyncForNavigationBlock.menus
+				{ label: __('Do not sync with classic menu', 'classic-menu-sync-for-block'), value: '' },
+				...window.classicMenuSyncForBlock.menus
 			];
 		}
-		return [{ label: __('Do not sync with classic menu', 'menu-sync-for-navigation-block'), value: '' }];
+		return [{ label: __('Do not sync with classic menu', 'classic-menu-sync-for-block'), value: '' }];
 	}
 
 	var withNavigationAutoSync = createHigherOrderComponent(function (BlockEdit) {
@@ -58,7 +58,7 @@
 
 				// Load current sync settings using our custom API
 				apiFetch({
-					path: '/menu-sync-for-navigation-block/v1/settings/' + navigationPostId,
+					path: '/classic-menu-sync-for-block/v1/settings/' + navigationPostId,
 					method: 'GET'
 				}).then(function (settings) {
 					if (settings.linked_menu_id) {
@@ -71,7 +71,7 @@
 
 			function handleValidate() {
 				if (!navigationPostId) {
-					setStatusMessage(__('Navigation post not found.', 'menu-sync-for-navigation-block'));
+					setStatusMessage(__('Navigation post not found.', 'classic-menu-sync-for-block'));
 					return;
 				}
 
@@ -83,7 +83,7 @@
 				var autoSyncEnabled = selectedMenuId !== '';
 
 				apiFetch({
-					path: '/menu-sync-for-navigation-block/v1/settings/' + navigationPostId,
+					path: '/classic-menu-sync-for-block/v1/settings/' + navigationPostId,
 					method: 'POST',
 					data: {
 						linked_menu_id: linkedMenuId,
@@ -93,7 +93,7 @@
 					if (selectedMenuId) {
 						// Sync the navigation content if a menu is selected
 						return apiFetch({
-							path: '/menu-sync-for-navigation-block/v1/sync/' + navigationPostId + '/' + selectedMenuId,
+							path: '/classic-menu-sync-for-block/v1/sync/' + navigationPostId + '/' + selectedMenuId,
 							method: 'POST'
 						});
 					} else {
@@ -102,9 +102,9 @@
 					}
 				}).then(function (response) {
 					if (selectedMenuId) {
-						setStatusMessage(__('Navigation synchronized successfully!', 'menu-sync-for-navigation-block'));
+						setStatusMessage(__('Navigation synchronized successfully!', 'classic-menu-sync-for-block'));
 					} else {
-						setStatusMessage(__('Menu synchronization disabled.', 'menu-sync-for-navigation-block'));
+						setStatusMessage(__('Menu synchronization disabled.', 'classic-menu-sync-for-block'));
 					}
 
 					// Refresh the editor to show updated content after a delay
@@ -112,7 +112,7 @@
 						window.location.reload();
 					}, 1500);
 				}).catch(function (error) {
-					setStatusMessage(__('Operation failed: ', 'menu-sync-for-navigation-block') + (error.message || error));
+					setStatusMessage(__('Operation failed: ', 'classic-menu-sync-for-block') + (error.message || error));
 				}).finally(function () {
 					setIsLoading(false);
 				});
@@ -129,11 +129,11 @@
 				el(BlockEdit, props),
 				el(
 					InspectorControls,
-					{ key: 'menu-sync-for-navigation-block-controls', group: 'list' },
+					{ key: 'classic-menu-sync-for-block-controls', group: 'list' },
 					el(
 						PanelBody,
 						{
-							title: __('Menu Synchronization', 'menu-sync-for-navigation-block'),
+							title: __('Menu Synchronization', 'classic-menu-sync-for-block'),
 							initialOpen: false
 						},
 						statusMessage && el(
@@ -146,22 +146,22 @@
 							statusMessage
 						),
 						el(SelectControl, {
-							label: __('Synchronization Settings', 'menu-sync-for-navigation-block'),
+							label: __('Synchronization Settings', 'classic-menu-sync-for-block'),
 							value: selectedMenuId,
 							options: getMenuOptions(),
 							onChange: function (value) {
 								setSelectedMenuId(value);
 							},
 							help: selectedMenuId 
-								? __('This navigation will auto-sync with the selected menu when it changes.', 'menu-sync-for-navigation-block')
-								: __('No synchronization - manage this navigation manually.', 'menu-sync-for-navigation-block')
+								? __('This navigation will auto-sync with the selected menu when it changes.', 'classic-menu-sync-for-block')
+								: __('No synchronization - manage this navigation manually.', 'classic-menu-sync-for-block')
 						}),
 						el(Button, {
 							variant: 'primary',
 							onClick: handleValidate,
 							disabled: isLoading,
 							isBusy: isLoading
-						}, isLoading ? __('Applying...', 'menu-sync-for-navigation-block') : __('Apply Settings', 'menu-sync-for-navigation-block'))
+						}, isLoading ? __('Applying...', 'classic-menu-sync-for-block') : __('Apply Settings', 'classic-menu-sync-for-block'))
 					)
 				)
 			);
@@ -170,7 +170,7 @@
 
 	addFilter(
 		'editor.BlockEdit',
-		'menu-sync-for-navigation-block/with-navigation-auto-sync',
+		'classic-menu-sync-for-block/with-navigation-auto-sync',
 		withNavigationAutoSync,
 		5
 	);

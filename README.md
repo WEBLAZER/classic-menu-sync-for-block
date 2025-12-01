@@ -1,12 +1,12 @@
-# Menu Sync for Navigation Block
+# Classic Menu Sync for Block
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/WEBLAZER/menu-sync-for-navigation-block)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/WEBLAZER/classic-menu-sync-for-block)
 
 Un plugin WordPress qui synchronise automatiquement les blocs Navigation avec les menus classiques en utilisant le système d'import natif de WordPress.
 
 ## Description
 
-Menu Sync for Navigation Block permet de combler le fossé entre les menus WordPress classiques et le nouveau système de blocs Navigation. Ce plugin vous permet de :
+Classic Menu Sync for Block permet de combler le fossé entre les menus WordPress classiques et le nouveau système de blocs Navigation. Ce plugin vous permet de :
 
 * **Synchroniser les blocs Navigation avec les menus classiques** - Gardez vos blocs Navigation à jour avec les modifications de vos menus classiques
 * **Fonctionnalité de synchronisation automatique** - Mettez à jour automatiquement les blocs Navigation lorsque les menus classiques sont modifiés
@@ -26,7 +26,7 @@ Parfait pour les sites en transition des thèmes classiques vers les thèmes bas
 
 ## Installation
 
-1. Téléchargez le plugin ou clonez ce dépôt dans `/wp-content/plugins/menu-sync-for-navigation-block`
+1. Téléchargez le plugin ou clonez ce dépôt dans `/wp-content/plugins/classic-menu-sync-for-block`
 2. Activez le plugin via l'écran 'Plugins' dans WordPress
 3. Éditez n'importe quel bloc Navigation dans le Block Editor
 4. Dans la barre latérale du bloc Navigation, trouvez le panneau "Auto Sync with Classic Menu"
@@ -56,8 +56,8 @@ Vous pouvez déclencher une synchronisation manuelle à tout moment en cliquant 
 
 Le plugin expose des endpoints REST API pour un accès programmatique :
 
-* `GET/POST /wp-json/menu-sync-for-navigation-block/v1/settings/{post_id}` - Gérer les paramètres de synchronisation
-* `POST /wp-json/menu-sync-for-navigation-block/v1/sync/{post_id}/{menu_id}` - Déclencher une opération de synchronisation
+* `GET/POST /wp-json/classic-menu-sync-for-block/v1/settings/{post_id}` - Gérer les paramètres de synchronisation
+* `POST /wp-json/classic-menu-sync-for-block/v1/sync/{post_id}/{menu_id}` - Déclencher une opération de synchronisation
 
 ## Développement
 
@@ -66,12 +66,12 @@ Ce plugin utilise la classe native `WP_Classic_To_Block_Menu_Converter` de WordP
 ### Structure du code
 
 ```
-menu-sync-for-navigation-block/
+classic-menu-sync-for-block/
 ├── assets/
 │   ├── editor.js      # Scripts pour l'éditeur de blocs
 │   └── editor.css     # Styles pour l'éditeur de blocs
 ├── languages/         # Fichiers de traduction
-├── menu-sync-for-navigation-block.php  # Fichier principal
+├── classic-menu-sync-for-block.php  # Fichier principal
 ├── uninstall.php      # Script de désinstallation
 └── readme.txt         # Fichier readme pour WordPress.org
 ```
@@ -96,7 +96,7 @@ Le bloc Navigation conservera son dernier contenu synchronisé. Vous pouvez le m
 
 ## Dépôt GitHub
 
-Ce plugin est disponible sur GitHub : [https://github.com/WEBLAZER/menu-sync-for-navigation-block](https://github.com/WEBLAZER/menu-sync-for-navigation-block)
+Ce plugin est disponible sur GitHub : [https://github.com/WEBLAZER/classic-menu-sync-for-block](https://github.com/WEBLAZER/classic-menu-sync-for-block)
 
 Vous pouvez contribuer, signaler des problèmes ou télécharger la dernière version depuis le dépôt.
 
@@ -110,7 +110,7 @@ GPL v2 ou ultérieure - https://www.gnu.org/licenses/gpl-2.0.html
 
 ## Auteur
 
-**weblazer35** - [weblazer.fr](https://weblazer.fr)
+**weblazer** - [Profil WordPress.org](https://profiles.wordpress.org/weblazer/) | [weblazer.fr](https://weblazer.fr)
 
 ## Changelog
 

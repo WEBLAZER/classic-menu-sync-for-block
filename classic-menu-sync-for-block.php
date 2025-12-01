@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name: Menu Sync for Navigation Block
- * Plugin URI: https://weblazer.fr/plugins/menu-sync-for-navigation-block
- * GitHub Plugin URI: https://github.com/WEBLAZER/menu-sync-for-navigation-block
+ * Plugin Name: Classic Menu Sync for Block
+ * Plugin URI: https://github.com/WEBLAZER/classic-menu-sync-for-block
+ * GitHub Plugin URI: https://github.com/WEBLAZER/classic-menu-sync-for-block
  * Description: Automatically synchronizes Navigation blocks with classic menus using WordPress native import system.
  * Version: 1.0.0
- * Author: weblazer35
- * Author URI: https://weblazer.fr
+ * Author: weblazer
+ * Author URI: https://profiles.wordpress.org/weblazer/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: menu-sync-for-navigation-block
+ * Text Domain: classic-menu-sync-for-block
  * Domain Path: /languages
  * Requires at least: 6.0
  * Tested up to: 6.8
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Menu_Sync_For_Navigation_Block {
+class Classic_Menu_Sync_For_Block {
 
 	/**
 	 * Initialize the plugin.
@@ -37,7 +37,7 @@ class Menu_Sync_For_Navigation_Block {
 	 */
 	public static function enqueue_editor_assets() {
 		wp_enqueue_script(
-			'menu-sync-for-navigation-block',
+			'classic-menu-sync-for-block',
 			plugins_url( 'assets/editor.js', __FILE__ ),
 			array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n', 'wp-block-editor', 'wp-compose', 'wp-hooks', 'wp-api-fetch' ),
 			'1.0.0',
@@ -45,7 +45,7 @@ class Menu_Sync_For_Navigation_Block {
 		);
 
 		wp_enqueue_style(
-			'menu-sync-for-navigation-block',
+			'classic-menu-sync-for-block',
 			plugins_url( 'assets/editor.css', __FILE__ ),
 			array(),
 			'1.0.0'
@@ -62,11 +62,11 @@ class Menu_Sync_For_Navigation_Block {
 		}
 
 		wp_localize_script(
-			'menu-sync-for-navigation-block',
-			'menuSyncForNavigationBlock',
+			'classic-menu-sync-for-block',
+			'classicMenuSyncForBlock',
 			array(
 				'menus' => $menu_options,
-				'nonce' => wp_create_nonce( 'menu_sync_for_navigation_block' ),
+				'nonce' => wp_create_nonce( 'classic_menu_sync_for_block' ),
 			)
 		);
 	}
@@ -76,7 +76,7 @@ class Menu_Sync_For_Navigation_Block {
 	 */
 	public static function register_rest_routes() {
 		register_rest_route(
-			'menu-sync-for-navigation-block/v1',
+			'classic-menu-sync-for-block/v1',
 			'/sync/(?P<post_id>\d+)/(?P<menu_id>\d+)',
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
@@ -100,7 +100,7 @@ class Menu_Sync_For_Navigation_Block {
 		);
 
 		register_rest_route(
-			'menu-sync-for-navigation-block/v1',
+			'classic-menu-sync-for-block/v1',
 			'/settings/(?P<post_id>\d+)',
 			array(
 				'methods'             => array( WP_REST_Server::READABLE, WP_REST_Server::CREATABLE ),
@@ -184,8 +184,8 @@ class Menu_Sync_For_Navigation_Block {
 	 */
 	public static function sync_navigation_blocks_on_menu_save( $menu_id ) {
 		// Check cache first to avoid repeated queries
-		$cache_key = 'menu_sync_nav_posts_' . $menu_id;
-		$linked_navigations = wp_cache_get( $cache_key, 'menu_sync_for_navigation_block' );
+		$cache_key = 'classic_menu_sync_nav_posts_' . $menu_id;
+		$linked_navigations = wp_cache_get( $cache_key, 'classic_menu_sync_for_block' );
 		
 		if ( false === $linked_navigations ) {
 			// Use WP_Query for better performance control and WordPress compliance
@@ -209,12 +209,12 @@ class Menu_Sync_For_Navigation_Block {
 			$linked_navigations = $query->posts;
 			
 			// Cache for 5 minutes
-			wp_cache_set( $cache_key, $linked_navigations, 'menu_sync_for_navigation_block', 300 );
+			wp_cache_set( $cache_key, $linked_navigations, 'classic_menu_sync_for_block', 300 );
 		}
 
 		foreach ( $linked_navigations as $navigation_id ) {
 			// Clear cache when syncing to ensure fresh data
-			wp_cache_delete( 'menu_sync_nav_posts_' . $menu_id, 'menu_sync_for_navigation_block' );
+			wp_cache_delete( 'classic_menu_sync_nav_posts_' . $menu_id, 'classic_menu_sync_for_block' );
 			self::sync_navigation_with_classic_menu( (int) $navigation_id, $menu_id );
 		}
 	}
@@ -224,12 +224,12 @@ class Menu_Sync_For_Navigation_Block {
 	 */
 	public static function sync_navigation_with_classic_menu( $post_id, $menu_id ) {
 		if ( ! class_exists( 'WP_Classic_To_Block_Menu_Converter' ) ) {
-			return new WP_Error( 'converter_not_available', __( 'Menu converter not available.', 'menu-sync-for-navigation-block' ) );
+			return new WP_Error( 'converter_not_available', __( 'Menu converter not available.', 'classic-menu-sync-for-block' ) );
 		}
 
 		$menu = wp_get_nav_menu_object( $menu_id );
 		if ( ! $menu ) {
-			return new WP_Error( 'invalid_menu', __( 'Menu not found.', 'menu-sync-for-navigation-block' ) );
+			return new WP_Error( 'invalid_menu', __( 'Menu not found.', 'classic-menu-sync-for-block' ) );
 		}
 
 		// Convert classic menu to blocks using WordPress native converter
@@ -297,4 +297,4 @@ class Menu_Sync_For_Navigation_Block {
 }
 
 // Initialize the plugin
-Menu_Sync_For_Navigation_Block::init();
+Classic_Menu_Sync_For_Block::init();
